@@ -1,12 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from "react";
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 // src/App.jsx
-import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import ArcanoModal from "./components/ArcanoModal";
 
   const arcanos = [
   { id: 0, nombre: "El Loco", imagen: import.meta.env.BASE_URL + "assets/arcanos/A00_avec_bordure_W540.png" },
@@ -36,26 +35,39 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
   
 
 export default function App() {
+  const [selectedArcano, setSelectedArcano] = useState(null);
+
   return (
+    
     <div className="container py-4">
       <h1 className="text-center mb-4">Arcanos Mayores</h1>
 
       <div className="row g-3">
         {arcanos.map((arcano) => (
           <div key={arcano.id} className="col-6 col-sm-4 col-md-3 col-lg-2 text-center">
-            <div className="card h-100">
-              <img
-                src={arcano.imagen}
-                alt={arcano.nombre}
-                className="card-img-top img-fluid"
-              />
-              <div className="card-body p-2">
-                <p className="card-text fw-bold small">{arcano.nombre}</p>
-              </div>
-            </div>
+            <div
+  className="card h-100"
+  role="button"
+  data-bs-toggle="modal"
+  data-bs-target="#arcanoModal"
+  onClick={() => setSelectedArcano(arcano)}
+>
+  <img
+    src={arcano.imagen}
+    alt={arcano.nombre}
+    className="card-img-top img-fluid"
+  />
+  <div className="card-body p-2">
+    <p className="card-text fw-bold small">{arcano.nombre}</p>
+  </div>
+</div>
           </div>
         ))}
       </div>
+      <ArcanoModal arcano={selectedArcano} />
+
     </div>
+    
   );
+  
 }
