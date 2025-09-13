@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import arcanosMenores from "../data/arcanosMenores";
 
 export default function ArcanosMenores() {
-  const palos = ["Bastos", "Copas", "Espadas", "Oros"];
+  const palos = ["Copas", "Espadas", "Oros", "Bastos"];
+
 
   return (
     <div className="container py-4">
