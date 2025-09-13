@@ -7,7 +7,6 @@ export default function ArcanoModal({ arcano }) {
         <div className="modal-content">
           {arcano ? (
             <>
-              {/* Header más compacto */}
               <div className="modal-header p-2">
                 <h5 className="modal-title m-0">{arcano.nombre}</h5>
                 <button
@@ -18,14 +17,22 @@ export default function ArcanoModal({ arcano }) {
                 ></button>
               </div>
 
-              {/* Imagen más grande */}
-              <div className="modal-body p-0 text-center">
+              {/* Scroll interno */}
+              <div
+                className="modal-body p-0 text-center"
+                style={{ maxHeight: "75vh", overflowY: "auto" }}
+              >
                 <img
                   src={arcano.imagen}
                   alt={arcano.nombre}
-                  className="img-fluid"
-                  style={{ maxHeight: "80vh", objectFit: "contain" }}
+                  className="img-fluid mb-3"
+                  style={{ maxHeight: "40vh", objectFit: "contain" }}
                 />
+                {arcano.descripcion && (
+                  <p className="px-3 text-start" style={{ whiteSpace: "pre-line" }}>
+                    {arcano.descripcion}
+                  </p>
+                )}
               </div>
             </>
           ) : (
