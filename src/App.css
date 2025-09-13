@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Animación suave del menú hamburguesa */
+.collapse.navbar-collapse {
+  transition: max-height 0.4s ease-in-out;
+  overflow: hidden;
+  max-height: 0;
+}
+
+.collapse.navbar-collapse.show {
+  max-height: 500px; /* suficiente para todos los links */
+}
+
