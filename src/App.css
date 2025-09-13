@@ -52,3 +52,17 @@
   max-height: 500px; /* suficiente para todos los links */
 }
 
+/* Animación suave para el menú hamburguesa */
+.navbar-collapse {
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+
+.navbar-collapse.collapsing-custom {
+  max-height: 0;
+}
+
+.navbar-collapse.show {
+  max-height: 500px; /* suficiente para mostrar los links */
+}
+

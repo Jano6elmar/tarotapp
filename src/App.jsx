@@ -8,10 +8,10 @@ import ArcanosMenores from "./pages/ArcanosMenores";
 import Lecturas from "./pages/Lecturas";
 import PaloMenor from "./pages/PaloMenor";
 
-// Componente principal con fix de modales
 function AppContent() {
   const location = useLocation();
 
+  // Cierra modales y menú al cambiar de ruta
   useEffect(() => {
     // Cerrar modales abiertos
     const modals = document.querySelectorAll(".modal.show");
@@ -20,14 +20,53 @@ function AppContent() {
       if (modal) modal.hide();
     });
 
-    // Eliminar backdrop si quedó pegado
+    // Eliminar backdrop de modales
     const backdrops = document.querySelectorAll(".modal-backdrop");
     backdrops.forEach((bd) => bd.remove());
+
+    // Cerrar menú hamburguesa si estaba abierto
+    const navCollapse = document.querySelector(".navbar-collapse.show");
+    if (navCollapse) {
+      navCollapse.classList.remove("show");
+    }
   }, [location]);
+
+  // Manejo manual de la hamburguesa con animación suave
+  useEffect(() => {
+    const toggler = document.querySelector(".navbar-toggler");
+    const navCollapse = document.querySelector("#navbarNav");
+
+    const handleToggle = () => {
+      if (navCollapse.classList.contains("show")) {
+        // cerrar con animación
+        navCollapse.classList.remove("show");
+        navCollapse.classList.add("collapsing-custom");
+        setTimeout(() => {
+          navCollapse.classList.remove("collapsing-custom");
+        }, 300); // mismo tiempo que el CSS transition
+      } else {
+        // abrir con animación
+        navCollapse.classList.add("collapsing-custom");
+        setTimeout(() => {
+          navCollapse.classList.remove("collapsing-custom");
+          navCollapse.classList.add("show");
+        }, 10);
+      }
+    };
+
+    if (toggler) {
+      toggler.addEventListener("click", handleToggle);
+    }
+
+    return () => {
+      if (toggler) {
+        toggler.removeEventListener("click", handleToggle);
+      }
+    };
+  }, []);
 
   return (
     <>
-      {/* Navbar fijo arriba */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
@@ -36,8 +75,6 @@ function AppContent() {
           <button
             className="navbar-toggler"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
@@ -66,7 +103,6 @@ function AppContent() {
         </div>
       </nav>
 
-      {/* Contenido principal */}
       <div className="pt-5 mt-3">
         <Routes>
           <Route path="/" element={<Home />} />
