@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import ArcanosMayores from "./pages/ArcanosMayores";
 import ArcanosMenores from "./pages/ArcanosMenores";
+import PaloMenor from "./pages/PaloMenor";
+
 import Lecturas from "./pages/Lecturas";
 
 function App() {
@@ -55,6 +57,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/arcanos-mayores" element={<ArcanosMayores />} />
           <Route path="/arcanos-menores" element={<ArcanosMenores />} />
+          <Route path="/arcanos-menores/:palo" element={<PaloMenor />} />
+
           <Route path="/lecturas" element={<Lecturas />} />
         </Routes>
       </div>

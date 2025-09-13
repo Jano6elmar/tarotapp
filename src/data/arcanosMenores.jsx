@@ -1,0 +1,67 @@
+const arcanosMenores = [
+  // Bastos
+  { id: 22, palo: "Bastos", nombre: "As de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B01_avec_bordure_W540.png", descripcion: "" },
+  { id: 23, palo: "Bastos", nombre: "Dos de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B02_avec_bordure_W540.png", descripcion: "" },
+  { id: 24, palo: "Bastos", nombre: "Tres de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B03_avec_bordure_W540.png", descripcion: "" },
+  { id: 25, palo: "Bastos", nombre: "Cuatro de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B04_avec_bordure_W540.png", descripcion: "" },
+  { id: 26, palo: "Bastos", nombre: "Cinco de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B05_avec_bordure_W540.png", descripcion: "" },
+  { id: 27, palo: "Bastos", nombre: "Seis de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B06_avec_bordure_W540.png", descripcion: "" },
+  { id: 28, palo: "Bastos", nombre: "Siete de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B07_avec_bordure_W540.png", descripcion: "" },
+  { id: 29, palo: "Bastos", nombre: "Ocho de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B08_avec_bordure_W540.png", descripcion: "" },
+  { id: 30, palo: "Bastos", nombre: "Nueve de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B09_avec_bordure_W540.png", descripcion: "" },
+  { id: 31, palo: "Bastos", nombre: "Diez de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/B10_avec_bordure_W540.png", descripcion: "" },
+  { id: 32, palo: "Bastos", nombre: "Paje de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/BAV_avec_bordure_W540.png", descripcion: "" },
+  { id: 33, palo: "Bastos", nombre: "Reina de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/BBQ_avec_bordure_W540.png", descripcion: "" },
+  { id: 34, palo: "Bastos", nombre: "Rey de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/BCK_avec_bordure_W540.png", descripcion: "" },
+  { id: 35, palo: "Bastos", nombre: "Caballero de Bastos", imagen: import.meta.env.BASE_URL + "assets/menores/menores/bastos/BDC_avec_bordure_W540.png", descripcion: "" },
+
+  // Copas
+  { id: 36, palo: "Copas", nombre: "As de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C01_avec_bordure_W540.png", descripcion: "" },
+  { id: 37, palo: "Copas", nombre: "Dos de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C02_avec_bordure_W540.png", descripcion: "" },
+  { id: 38, palo: "Copas", nombre: "Tres de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C03_avec_bordure_W540.png", descripcion: "" },
+  { id: 39, palo: "Copas", nombre: "Cuatro de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C04_avec_bordure_W540.png", descripcion: "" },
+  { id: 40, palo: "Copas", nombre: "Cinco de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C05_avec_bordure_W540.png", descripcion: "" },
+  { id: 41, palo: "Copas", nombre: "Seis de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C06_avec_bordure_W540.png", descripcion: "" },
+  { id: 42, palo: "Copas", nombre: "Siete de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C07_avec_bordure_W540.png", descripcion: "" },
+  { id: 43, palo: "Copas", nombre: "Ocho de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C08_avec_bordure_W540.png", descripcion: "" },
+  { id: 44, palo: "Copas", nombre: "Nueve de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C09_avec_bordure_W540.png", descripcion: "" },
+  { id: 45, palo: "Copas", nombre: "Diez de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/C10_avec_bordure_W540.png", descripcion: "" },
+  { id: 46, palo: "Copas", nombre: "Paje de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/CAV_avec_bordure_W540.png", descripcion: "" },
+  { id: 47, palo: "Copas", nombre: "Reina de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/CBQ_avec_bordure_W540.png", descripcion: "" },
+  { id: 48, palo: "Copas", nombre: "Rey de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/CCK_avec_bordure_W540.png", descripcion: "" },
+  { id: 49, palo: "Copas", nombre: "Caballero de Copas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/copas/CDC_avec_bordure_W540.png", descripcion: "" },
+
+  // Espadas
+  { id: 50, palo: "Espadas", nombre: "As de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E01_avec_bordure_W540.png", descripcion: "" },
+  { id: 51, palo: "Espadas", nombre: "Dos de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E02_avec_bordure_W540.png", descripcion: "" },
+  { id: 52, palo: "Espadas", nombre: "Tres de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E03_avec_bordure_W540.png", descripcion: "" },
+  { id: 53, palo: "Espadas", nombre: "Cuatro de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E04_avec_bordure_W540.png", descripcion: "" },
+  { id: 54, palo: "Espadas", nombre: "Cinco de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E05_avec_bordure_W540.png", descripcion: "" },
+  { id: 55, palo: "Espadas", nombre: "Seis de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E06_avec_bordure_W540.png", descripcion: "" },
+  { id: 56, palo: "Espadas", nombre: "Siete de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E07_avec_bordure_W540.png", descripcion: "" },
+  { id: 57, palo: "Espadas", nombre: "Ocho de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E08_avec_bordure_W540.png", descripcion: "" },
+  { id: 58, palo: "Espadas", nombre: "Nueve de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E09_avec_bordure_W540.png", descripcion: "" },
+  { id: 59, palo: "Espadas", nombre: "Diez de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/E10_avec_bordure_W540.png", descripcion: "" },
+  { id: 60, palo: "Espadas", nombre: "Paje de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/EAV_avec_bordure_W540.png", descripcion: "" },
+  { id: 61, palo: "Espadas", nombre: "Reina de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/EBQ_avec_bordure_W540.png", descripcion: "" },
+  { id: 62, palo: "Espadas", nombre: "Rey de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/ECK_avec_bordure_W540.png", descripcion: "" },
+  { id: 63, palo: "Espadas", nombre: "Caballero de Espadas", imagen: import.meta.env.BASE_URL + "assets/menores/menores/espadas/EDC_avec_bordure_W540.png", descripcion: "" },
+
+  // Oros
+  { id: 64, palo: "Oros", nombre: "As de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D01_avec_bordure_W540.png", descripcion: "" },
+  { id: 65, palo: "Oros", nombre: "Dos de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D02_avec_bordure_W540.png", descripcion: "" },
+  { id: 66, palo: "Oros", nombre: "Tres de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D03_avec_bordure_W540.png", descripcion: "" },
+  { id: 67, palo: "Oros", nombre: "Cuatro de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D04_avec_bordure_W540.png", descripcion: "" },
+  { id: 68, palo: "Oros", nombre: "Cinco de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D05_avec_bordure_W540.png", descripcion: "" },
+  { id: 69, palo: "Oros", nombre: "Seis de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D06_avec_bordure_W540.png", descripcion: "" },
+  { id: 70, palo: "Oros", nombre: "Siete de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D07_avec_bordure_W540.png", descripcion: "" },
+  { id: 71, palo: "Oros", nombre: "Ocho de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D08_avec_bordure_W540.png", descripcion: "" },
+  { id: 72, palo: "Oros", nombre: "Nueve de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D09_avec_bordure_W540.png", descripcion: "" },
+  { id: 73, palo: "Oros", nombre: "Diez de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/D10_avec_bordure_W540.png", descripcion: "" },
+  { id: 74, palo: "Oros", nombre: "Paje de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/DAV_avec_bordure_W540.png", descripcion: "" },
+  { id: 75, palo: "Oros", nombre: "Reina de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/DBQ_avec_bordure_W540.png", descripcion: "" },
+  { id: 76, palo: "Oros", nombre: "Rey de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/DCK_avec_bordure_W540.png", descripcion: "" },
+  { id: 77, palo: "Oros", nombre: "Caballero de Oros", imagen: import.meta.env.BASE_URL + "assets/menores/menores/oros/DDC_avec_bordure_W540.png", descripcion: "" }
+];
+
+export default arcanosMenores;
