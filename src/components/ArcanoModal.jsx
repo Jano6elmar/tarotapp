@@ -7,8 +7,9 @@ export default function ArcanoModal({ arcano }) {
         <div className="modal-content">
           {arcano ? (
             <>
-              <div className="modal-header">
-                <h5 className="modal-title">{arcano.nombre}</h5>
+              {/* Header más compacto */}
+              <div className="modal-header p-2">
+                <h5 className="modal-title m-0">{arcano.nombre}</h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -16,8 +17,15 @@ export default function ArcanoModal({ arcano }) {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body text-center">
-                <img src={arcano.imagen} alt={arcano.nombre} className="img-fluid" />
+
+              {/* Imagen más grande */}
+              <div className="modal-body p-0 text-center">
+                <img
+                  src={arcano.imagen}
+                  alt={arcano.nombre}
+                  className="img-fluid"
+                  style={{ maxHeight: "80vh", objectFit: "contain" }}
+                />
               </div>
             </>
           ) : (
