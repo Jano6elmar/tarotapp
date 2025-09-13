@@ -1,49 +1,63 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import { Modal } from "bootstrap";
+
 import Home from "./pages/Home";
 import ArcanosMayores from "./pages/ArcanosMayores";
 import ArcanosMenores from "./pages/ArcanosMenores";
+import Lecturas from "./pages/Lecturas";
 import PaloMenor from "./pages/PaloMenor";
 
-import Lecturas from "./pages/Lecturas";
+// Componente principal con fix de modales
+function AppContent() {
+  const location = useLocation();
 
-function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    // Cerrar modales abiertos
+    const modals = document.querySelectorAll(".modal.show");
+    modals.forEach((modalEl) => {
+      const modal = Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+    });
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
+    // Eliminar backdrop si quedó pegado
+    const backdrops = document.querySelectorAll(".modal-backdrop");
+    backdrops.forEach((bd) => bd.remove());
+  }, [location]);
 
   return (
-    <Router>
+    <>
+      {/* Navbar fijo arriba */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/" onClick={closeMenu}>
+          <Link className="navbar-brand" to="/">
             Tarot App
           </Link>
-
           <button
             className="navbar-toggler"
             type="button"
-            onClick={toggleMenu}
-            aria-expanded={isOpen ? "true" : "false"}
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
-          <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`} id="navbarNav">
-            <ul className="navbar-nav ms-auto">
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link" to="/arcanos-mayores" onClick={closeMenu}>
+                <Link className="nav-link" to="/arcanos-mayores">
                   Arcanos Mayores
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/arcanos-menores" onClick={closeMenu}>
+                <Link className="nav-link" to="/arcanos-menores">
                   Arcanos Menores
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/lecturas" onClick={closeMenu}>
+                <Link className="nav-link" to="/lecturas">
                   Lecturas
                 </Link>
               </li>
@@ -52,18 +66,24 @@ function App() {
         </div>
       </nav>
 
-      <div style={{ marginTop: "80px" }}>
+      {/* Contenido principal */}
+      <div className="pt-5 mt-3">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/arcanos-mayores" element={<ArcanosMayores />} />
           <Route path="/arcanos-menores" element={<ArcanosMenores />} />
           <Route path="/arcanos-menores/:palo" element={<PaloMenor />} />
-
           <Route path="/lecturas" element={<Lecturas />} />
         </Routes>
       </div>
-    </Router>
+    </>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
