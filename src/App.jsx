@@ -8,8 +8,12 @@ import ArcanosMenores from "./pages/ArcanosMenores";
 import Lecturas from "./pages/Lecturas";
 import PaloMenor from "./pages/PaloMenor";
 
+
+
+
 function AppContent() {
-  const location = useLocation();
+
+  
 
   // Cierra modales y menú al cambiar de ruta
   useEffect(() => {
@@ -101,6 +105,9 @@ function AppContent() {
             </ul>
           </div>
         </div>
+        <div className="bg-green-500 text-white p-6">
+      ✅ Tailwind v4 está funcionando
+    </div>
       </nav>
 
       <div className="pt-5 mt-3">
