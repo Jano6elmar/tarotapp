@@ -10,6 +10,7 @@
   "preview": "vite preview",
   "deploy": "gh-pages -d dist -f"
 }
+
 ,
   "dependencies": {
     "bootstrap": "^5.3.8",
