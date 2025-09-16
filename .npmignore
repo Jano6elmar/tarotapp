@@ -1,0 +1,15 @@
+# Logs
+logs
+*.log
+
+# Build
+dist-ssr
+build/
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+# Env
+*.env
