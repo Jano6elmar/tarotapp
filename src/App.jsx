@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
 
 import Home from "./pages/Home";
 import ArcanosMayores from "./pages/ArcanosMayores";
@@ -7,18 +13,15 @@ import ArcanosMenores from "./pages/ArcanosMenores";
 import Lecturas from "./pages/Lecturas";
 import PaloMenor from "./pages/PaloMenor";
 
-
-
-
 function AppContent() {
-  
+  const location = useLocation();
 
-  // Cierra modales y menú al cambiar de ruta
+  // 🔹 Cierra modales y menú al cambiar de ruta
   useEffect(() => {
     // Cerrar modales abiertos
     const modals = document.querySelectorAll(".modal.show");
     modals.forEach((modalEl) => {
-      const modal = Modal.getInstance(modalEl);
+      const modal = window.bootstrap?.Modal.getInstance(modalEl);
       if (modal) modal.hide();
     });
 
@@ -33,37 +36,23 @@ function AppContent() {
     }
   }, [location]);
 
-  // Manejo manual de la hamburguesa con animación suave
+  // 🔹 Cierra el menú hamburguesa al hacer click en un link del nav
   useEffect(() => {
-    const toggler = document.querySelector(".navbar-toggler");
+    const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
     const navCollapse = document.querySelector("#navbarNav");
 
-    const handleToggle = () => {
+    const handleClick = () => {
       if (navCollapse.classList.contains("show")) {
-        // cerrar con animación
         navCollapse.classList.remove("show");
-        navCollapse.classList.add("collapsing-custom");
-        setTimeout(() => {
-          navCollapse.classList.remove("collapsing-custom");
-        }, 300); // mismo tiempo que el CSS transition
-      } else {
-        // abrir con animación
-        navCollapse.classList.add("collapsing-custom");
-        setTimeout(() => {
-          navCollapse.classList.remove("collapsing-custom");
-          navCollapse.classList.add("show");
-        }, 10);
       }
     };
 
-    if (toggler) {
-      toggler.addEventListener("click", handleToggle);
-    }
+    navLinks.forEach((link) => link.addEventListener("click", handleClick));
 
     return () => {
-      if (toggler) {
-        toggler.removeEventListener("click", handleToggle);
-      }
+      navLinks.forEach((link) =>
+        link.removeEventListener("click", handleClick)
+      );
     };
   }, []);
 
@@ -77,6 +66,8 @@ function AppContent() {
           <button
             className="navbar-toggler"
             type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
@@ -103,7 +94,6 @@ function AppContent() {
             </ul>
           </div>
         </div>
-    
       </nav>
 
       <div className="pt-5 mt-3">
