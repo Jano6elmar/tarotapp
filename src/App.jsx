@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
-import { Modal } from "bootstrap";
 
 import Home from "./pages/Home";
 import ArcanosMayores from "./pages/ArcanosMayores";
@@ -12,7 +11,6 @@ import PaloMenor from "./pages/PaloMenor";
 
 
 function AppContent() {
-
   
 
   // Cierra modales y menú al cambiar de ruta
@@ -105,9 +103,7 @@ function AppContent() {
             </ul>
           </div>
         </div>
-        <div className="bg-green-500 text-white p-6">
-      ✅ Tailwind v4 está funcionando
-    </div>
+    
       </nav>
 
       <div className="pt-5 mt-3">

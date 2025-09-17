@@ -1,146 +1,207 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import backCard from "/assets/reverso/reverso.cartas.png";
+import arcanosMayores from "../data/arcanosMayores";
 
-// 22 Arcanos Mayores
-const arcana = Array.from({ length: 22 }, (_, i) => ({
-  id: i,
-  img: `${import.meta.env.BASE_URL}assets/arcanos/A${String(i).padStart(
-    2,
-    "0"
-  )}_avec_bordure_W540.png`,
-}));
+const Lecturas = () => {
+  const [cartas, setCartas] = useState([]);
+  const [seleccionadas, setSeleccionadas] = useState([]);
+  const [mostrarMazo, setMostrarMazo] = useState(true);
+  const [flipped, setFlipped] = useState({}); // 🔹 Estado para controlar qué cartas se voltearon
 
-export default function Lecturas() {
-  const [deck, setDeck] = useState(arcana);
-  const [showDeck, setShowDeck] = useState(false);
-  const [selected, setSelected] = useState([]);
-
-  const shuffle = () => {
-    const newDeck = [...arcana].sort(() => Math.random() - 0.5);
-    setDeck(newDeck);
-    setSelected([]);
-    setShowDeck(false);
+  // Mezclar y desplegar cartas
+  const mezclarYDesplegar = () => {
+    const cartasMezcladas = [...arcanosMayores].sort(() => Math.random() - 0.5);
+    setCartas(cartasMezcladas);
+    setSeleccionadas([]);
+    setFlipped({});
+    setMostrarMazo(false); // Oculta el mazo al desplegar
   };
 
-  const handleSelect = (card) => {
-    if (selected.length < 3 && !selected.includes(card)) {
-      setSelected([...selected, card]);
+  // Seleccionar carta
+  const seleccionarCarta = (carta) => {
+    if (seleccionadas.length < 3 && !seleccionadas.includes(carta)) {
+      // 🔹 Voltea primero la carta
+      setFlipped({ ...flipped, [carta.id]: true });
+
+      // 🔹 Espera la animación y luego pasa a tirada
+      setTimeout(() => {
+        setSeleccionadas([...seleccionadas, carta]);
+        setCartas(cartas.filter((c) => c.id !== carta.id));
+      }, 800); // mismo tiempo que la animación
     }
   };
 
-  // Ángulo para abanico semicircular
-  const getRotation = (index, total) => {
-    const step = 180 / (total - 1);
-    return -90 + step * index;
-  };
-
-  const reverseSrc = `${import.meta.env.BASE_URL}assets/reverso/reverso.cartas.png`;
-
   return (
-    <div className="flex flex-col items-center p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Tirada: Pasado, Presente y Futuro</h1>
+    <div className="container mt-4">
+      <div className="row">
+        {/* Bloque Mazo */}
+        <div className="col-3 text-center border-end">
+          <h5>Mazo</h5>
+          {mostrarMazo && (
+            <div
+              className="position-relative d-inline-block"
+              style={{ height: "200px", marginLeft: "-30px" }}
+            >
+              {[...Array(10)].map((_, i) => (
+                <img
+                  key={i}
+                  src={backCard}
+                  alt="Mazo"
+                  className="position-absolute shadow-sm"
+                  style={{
+                    top: i * 2,
+                    left: i * 2,
+                    width: "120px",
+                    borderRadius: "8px",
+                    zIndex: i,
+                  }}
+                />
+              ))}
+            </div>
+          )}
+          {mostrarMazo && (
+            <div className="mt-3">
+              <button onClick={mezclarYDesplegar} className="btn btn-primary">
+                Mezclar y Desplegar
+              </button>
+            </div>
+          )}
+        </div>
 
-      {/* Botones */}
-      <div className="flex space-x-4">
-        <button
-          onClick={shuffle}
-          className="px-4 py-2 bg-purple-600 text-white rounded-lg shadow"
-        >
-          Mezclar
-        </button>
-        <button
-          onClick={() => setShowDeck(true)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow"
-        >
-          Desplegar
-        </button>
+        {/* Bloque Cartas Superpuestas */}
+        <div className="col-9 text-center">
+          <h5>Aquí las 22 cartas superpuestas</h5>
+          <div
+            className="position-relative d-flex justify-content-center mt-3"
+            style={{ height: "260px" }}
+          >
+            {cartas.map((carta, index) => (
+              <div
+                key={carta.id}
+                className="position-absolute"
+                style={{
+                  left: `${index * 35}px`,
+                  transform: `rotate(${
+                    index * 5 - (cartas.length * 2.5)
+                  }deg) translateY(-20px)`,
+                  transition: "transform 0.3s",
+                  cursor: "pointer",
+                  perspective: "1000px",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = `rotate(${
+                    index * 5 - (cartas.length * 2.5)
+                  }deg) translateY(-40px) scale(1.1)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = `rotate(${
+                    index * 5 - (cartas.length * 2.5)
+                  }deg) translateY(-20px) scale(1)`;
+                }}
+                onClick={() => seleccionarCarta(carta)}
+              >
+                <div
+                  style={{
+                    width: "120px",
+                    height: "200px",
+                    position: "relative",
+                    transformStyle: "preserve-3d",
+                    transition: "transform 0.8s",
+                    transform: flipped[carta.id]
+                      ? "rotateY(180deg)"
+                      : "rotateY(0deg)",
+                  }}
+                >
+                  {/* Reverso */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      backfaceVisibility: "hidden",
+                    }}
+                  >
+                    <img
+                      src={backCard}
+                      alt="Reverso"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "8px",
+                        border: "1px solid black",
+                      }}
+                    />
+                  </div>
+
+                  {/* Frente */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      backfaceVisibility: "hidden",
+                      transform: "rotateY(180deg)",
+                    }}
+                  >
+                    <img
+                      src={carta.imagen}
+                      alt={carta.nombre}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "8px",
+                        border: "1px solid black",
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Mazo cerrado */}
-      {!showDeck && selected.length === 0 && (
-        <div className="mt-6 text-center">
-          <img
-            src={reverseSrc}
-            alt="Mazo cerrado"
-            className="w-32 border-4 border-black rounded-lg shadow-lg"
-          />
-          <p className="mt-2 text-sm text-gray-700">22 cartas en el mazo</p>
-        </div>
-      )}
-
-      {/* Abanico semicircular */}
-      {showDeck && selected.length < 3 && (
-        <div className="relative flex justify-center items-end mt-16 w-full h-[320px]">
-          {deck.map((card, i) => {
-            const rotation = getRotation(i, deck.length);
-            return (
-              <img
-                key={card.id}
-                src={reverseSrc}
-                alt={`Carta ${card.id}`}
-                className="absolute w-20 border-2 border-black rounded-lg shadow-lg cursor-pointer hover:scale-110 transition-transform"
+      {/* Bloque Tirada */}
+      <div className="row mt-4">
+        <div className="col-12 text-center">
+          <h5>Aquí las 3 cartas seleccionadas en horizontal</h5>
+          <div className="d-flex justify-content-center mt-3">
+            {seleccionadas.map((carta) => (
+              <div
+                key={carta.id}
+                className="mx-3"
                 style={{
-                  transform: `rotate(${rotation}deg) translateY(120px)`,
-                  transformOrigin: "bottom center",
-                  left: "50%",
+                  width: "150px",
+                  height: "250px",
+                  perspective: "1000px",
                 }}
-                onClick={() => handleSelect(card)}
-              />
-            );
-          })}
+              >
+                <div
+                  className="shadow-sm"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "8px",
+                    border: "1px solid black",
+                  }}
+                >
+                  <img
+                    src={carta.imagen}
+                    alt={carta.nombre}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "8px",
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      )}
-
-      {/* Casilleros: Pasado – Presente – Futuro */}
-<div className="flex flex-row justify-center items-start gap-12 mt-10 w-full">
-  {/* Pasado */}
-  <div className="flex flex-col items-center">
-    <p className="mb-2 font-bold">Pasado</p>
-    <div className="w-32 h-48 border-2 border-dashed border-gray-400 flex items-center justify-center rounded-lg">
-      {selected[0] ? (
-        <img
-          src={selected[0].img}
-          alt="Pasado"
-          className="w-full h-full object-cover border-2 border-black rounded-lg shadow-lg"
-        />
-      ) : (
-        <span className="text-xs text-gray-500">Vacío</span>
-      )}
-    </div>
-  </div>
-
-  {/* Presente */}
-  <div className="flex flex-col items-center">
-    <p className="mb-2 font-bold">Presente</p>
-    <div className="w-32 h-48 border-2 border-dashed border-gray-400 flex items-center justify-center rounded-lg">
-      {selected[1] ? (
-        <img
-          src={selected[1].img}
-          alt="Presente"
-          className="w-full h-full object-cover border-2 border-black rounded-lg shadow-lg"
-        />
-      ) : (
-        <span className="text-xs text-gray-500">Vacío</span>
-      )}
-    </div>
-  </div>
-
-  {/* Futuro */}
-  <div className="flex flex-col items-center">
-    <p className="mb-2 font-bold">Futuro</p>
-    <div className="w-32 h-48 border-2 border-dashed border-gray-400 flex items-center justify-center rounded-lg">
-      {selected[2] ? (
-        <img
-          src={selected[2].img}
-          alt="Futuro"
-          className="w-full h-full object-cover border-2 border-black rounded-lg shadow-lg"
-        />
-      ) : (
-        <span className="text-xs text-gray-500">Vacío</span>
-      )}
-    </div>
-  </div>
-</div>
-
+      </div>
     </div>
   );
-}
+};
+
+export default Lecturas;
