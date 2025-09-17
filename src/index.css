@@ -1,4 +1,10 @@
-/* index.css */
-body {
-  background-color: #f8f9fa;
+@keyframes shuffleCard {
+  0%   { transform: translateY(0) rotate(0); }
+  30%  { transform: translateY(-30px) rotate(-5deg); }
+  60%  { transform: translateX(40px) rotate(5deg); }
+  100% { transform: translateY(0) translateX(0) rotate(0); }
+}
+
+.shuffle-card {
+  animation: shuffleCard 0.8s ease-in-out;
 }

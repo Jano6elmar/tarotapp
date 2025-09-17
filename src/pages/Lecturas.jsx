@@ -6,28 +6,34 @@ const Lecturas = () => {
   const [cartas, setCartas] = useState([]);
   const [seleccionadas, setSeleccionadas] = useState([]);
   const [mostrarMazo, setMostrarMazo] = useState(true);
-  const [flipped, setFlipped] = useState({}); // 🔹 Estado para controlar qué cartas se voltearon
+  const [flipped, setFlipped] = useState({});
+  const [shuffling, setShuffling] = useState(false);
 
   // Mezclar y desplegar cartas
   const mezclarYDesplegar = () => {
+    setShuffling(true); // activa animación
+
     const cartasMezcladas = [...arcanosMayores].sort(() => Math.random() - 0.5);
-    setCartas(cartasMezcladas);
-    setSeleccionadas([]);
-    setFlipped({});
-    setMostrarMazo(false); // Oculta el mazo al desplegar
+
+    // espera a que termine animación antes de mostrar el nuevo orden
+    setTimeout(() => {
+      setCartas(cartasMezcladas);
+      setSeleccionadas([]);
+      setFlipped({});
+      setMostrarMazo(false);
+      setShuffling(false);
+    }, 1000);
   };
 
   // Seleccionar carta
   const seleccionarCarta = (carta) => {
     if (seleccionadas.length < 3 && !seleccionadas.includes(carta)) {
-      // 🔹 Voltea primero la carta
       setFlipped({ ...flipped, [carta.id]: true });
 
-      // 🔹 Espera la animación y luego pasa a tirada
       setTimeout(() => {
         setSeleccionadas([...seleccionadas, carta]);
         setCartas(cartas.filter((c) => c.id !== carta.id));
-      }, 800); // mismo tiempo que la animación
+      }, 800);
     }
   };
 
@@ -36,7 +42,6 @@ const Lecturas = () => {
       <div className="row">
         {/* Bloque Mazo */}
         <div className="col-3 text-center border-end">
-          <h5>Mazo</h5>
           {mostrarMazo && (
             <div
               className="position-relative d-inline-block"
@@ -59,27 +64,29 @@ const Lecturas = () => {
               ))}
             </div>
           )}
-          {mostrarMazo && (
-            <div className="mt-3">
-              <button onClick={mezclarYDesplegar} className="btn btn-primary">
-                Mezclar y Desplegar
-              </button>
-            </div>
-          )}
+
+          <div className="mt-3">
+            <button onClick={mezclarYDesplegar} className="btn btn-primary">
+              Mezclar y Desplegar
+            </button>
+          </div>
         </div>
 
         {/* Bloque Cartas Superpuestas */}
         <div className="col-9 text-center">
-          <h5>Aquí las 22 cartas superpuestas</h5>
           <div
+            id="abanico"
             className="position-relative d-flex justify-content-center mt-3"
             style={{ height: "260px" }}
           >
             {cartas.map((carta, index) => (
               <div
                 key={carta.id}
-                className="position-absolute"
+                className={`position-absolute ${
+                  shuffling ? "shuffle-card" : ""
+                }`}
                 style={{
+                  animationDelay: shuffling ? `${index * 50}ms` : "0s",
                   left: `${index * 35}px`,
                   transform: `rotate(${
                     index * 5 - (cartas.length * 2.5)
@@ -89,14 +96,18 @@ const Lecturas = () => {
                   perspective: "1000px",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = `rotate(${
-                    index * 5 - (cartas.length * 2.5)
-                  }deg) translateY(-40px) scale(1.1)`;
+                  if (!shuffling) {
+                    e.currentTarget.style.transform = `rotate(${
+                      index * 5 - (cartas.length * 2.5)
+                    }deg) translateY(-40px) scale(1.1)`;
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = `rotate(${
-                    index * 5 - (cartas.length * 2.5)
-                  }deg) translateY(-20px) scale(1)`;
+                  if (!shuffling) {
+                    e.currentTarget.style.transform = `rotate(${
+                      index * 5 - (cartas.length * 2.5)
+                    }deg) translateY(-20px) scale(1)`;
+                  }
                 }}
                 onClick={() => seleccionarCarta(carta)}
               >
@@ -164,7 +175,6 @@ const Lecturas = () => {
       {/* Bloque Tirada */}
       <div className="row mt-4">
         <div className="col-12 text-center">
-          <h5>Aquí las 3 cartas seleccionadas en horizontal</h5>
           <div className="d-flex justify-content-center mt-3">
             {seleccionadas.map((carta) => (
               <div
