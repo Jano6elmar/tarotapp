@@ -66,6 +66,24 @@
 }
 
 /* Estilos para la página de inicio */
+.titulo-bienvenida {
+  font-size: clamp(1.5rem, 5vw, 3.5rem);
+}
+
+.estrella-decorativa {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+  .titulo-bienvenida {
+    font-size: 1.8rem !important;
+  }
+  .estrella-decorativa {
+    font-size: 2rem !important;
+  }
+}
+
 .hover-card {
   transition: all 0.3s ease;
   cursor: pointer;

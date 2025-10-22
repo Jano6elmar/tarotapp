@@ -123,8 +123,11 @@ function AppContent() {
 }
 
 export default function App() {
+  // Configurar basename según el entorno
+  const basename = import.meta.env.BASE_URL || '/';
+  
   return (
-    <Router>
+    <Router basename={basename}>
       <AppContent />
     </Router>
   );

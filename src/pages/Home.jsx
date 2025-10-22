@@ -5,9 +5,13 @@ export default function Home() {
     <div className="container py-5">
       {/* Sección de Bienvenida */}
       <div className="text-center mb-5">
-        <h1 className="display-3 fw-bold text-primary mb-3">
-          ✨ Bienvenido a TarotMarsellApp ✨
-        </h1>
+        <div className="d-flex justify-content-center align-items-center gap-3 mb-3 flex-wrap">
+          <span className="estrella-decorativa">✨</span>
+          <h1 className="titulo-bienvenida fw-bold text-primary mb-0">
+            Bienvenido a TarotMarsellApp
+          </h1>
+          <span className="estrella-decorativa">✨</span>
+        </div>
         <p className="lead text-muted mx-auto" style={{ maxWidth: "700px" }}>
           Descubre los secretos del tarot, explora los arcanos y obtén respuestas
           a tus preguntas más profundas. Tu camino hacia el autoconocimiento
