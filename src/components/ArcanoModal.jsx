@@ -9,93 +9,58 @@ export default function ArcanoModal({ arcano }) {
     }
   };
 
-  // 🔥 FIX: Manejar el botón de retroceso del navegador
+  // 🔥 FIX: Limpieza de estilos cuando el modal se cierra
   useEffect(() => {
     const modalElement = document.getElementById("arcanoModal");
     
     if (!modalElement) return;
 
-    let isClosingFromBackButton = false;
-
-    const handleModalShow = () => {
-      // Agregar una entrada al historial cuando se abre el modal
-      window.history.pushState({ modalOpen: true }, "");
-    };
-
-    const handleModalHide = () => {
-      // Solo retroceder si NO se está cerrando por el botón de retroceso
-      if (!isClosingFromBackButton && window.history.state?.modalOpen) {
-        window.history.back();
-      }
-      isClosingFromBackButton = false;
-    };
-
     const handleModalHidden = () => {
-      // 🔥 FIX: Asegurar limpieza de estilos cuando el modal se cierra completamente
+      // Limpieza de estilos
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
       document.body.classList.remove("modal-open");
       
-      // Eliminar backdrop residual
       const backdrops = document.querySelectorAll(".modal-backdrop");
       backdrops.forEach((bd) => bd.remove());
     };
 
-    const handlePopState = (event) => {
-      // Si el modal está abierto y se presiona retroceso, cerrarlo
-      const modal = window.bootstrap?.Modal.getInstance(modalElement);
-      if (modal && modalElement.classList.contains("show")) {
-        isClosingFromBackButton = true;
-        modal.hide();
-        
-        // 🔥 FIX: Limpiar estilos del body después de cerrar
-        setTimeout(() => {
-          document.body.style.overflow = "";
-          document.body.style.paddingRight = "";
-          document.body.classList.remove("modal-open");
-          
-          // Eliminar backdrop residual
-          const backdrops = document.querySelectorAll(".modal-backdrop");
-          backdrops.forEach((bd) => bd.remove());
-        }, 100);
-      }
-    };
-
-    // Escuchar eventos del modal
-    modalElement.addEventListener("show.bs.modal", handleModalShow);
-    modalElement.addEventListener("hide.bs.modal", handleModalHide);
     modalElement.addEventListener("hidden.bs.modal", handleModalHidden);
-    window.addEventListener("popstate", handlePopState);
 
     return () => {
-      modalElement.removeEventListener("show.bs.modal", handleModalShow);
-      modalElement.removeEventListener("hide.bs.modal", handleModalHide);
       modalElement.removeEventListener("hidden.bs.modal", handleModalHidden);
-      window.removeEventListener("popstate", handlePopState);
     };
   }, []);
 
   return (
-    <div className="modal fade" id="arcanoModal" tabIndex="-1" aria-hidden="true">
+    <div 
+      className="modal fade" 
+      id="arcanoModal" 
+      tabIndex="-1" 
+      aria-hidden="true"
+      data-bs-backdrop="true"
+      data-bs-keyboard="true"
+    >
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
           {arcano ? (
             <>
               {/* Header */}
-              <div className="modal-header p-2 d-flex justify-content-between align-items-center">
+              <div className="modal-header p-3 d-flex justify-content-between align-items-center">
                 <h5 className="modal-title m-0">{arcano.nombre}</h5>
                 <div className="d-flex gap-2 align-items-center">
                   <button
                     className="btn btn-sm btn-outline-secondary"
                     onClick={scrollToDesc}
                   >
-                    Descripción
+                    📖 Descripción
                   </button>
                   <button
                     type="button"
-                    className="btn-close"
+                    className="btn-close btn-close-lg"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label="Cerrar"
+                    style={{ fontSize: '1.2rem', padding: '0.5rem' }}
                   ></button>
                 </div>
               </div>
@@ -125,6 +90,17 @@ export default function ArcanoModal({ arcano }) {
                   </p>
                 </div>
               )}
+
+              {/* Botón de cerrar grande para móviles */}
+              <div className="modal-footer d-md-none border-0 pt-0">
+                <button
+                  type="button"
+                  className="btn btn-primary w-100 py-2"
+                  data-bs-dismiss="modal"
+                >
+                  ✓ Cerrar
+                </button>
+              </div>
             </>
           ) : (
             <div className="modal-body">Sin carta seleccionada.</div>

@@ -110,3 +110,21 @@
   background-color: #0056b3;
   transform: scale(1.05);
 }
+
+/* Estilos para el modal */
+.modal-backdrop {
+  cursor: pointer;
+}
+
+.btn-close-lg {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Hacer el botón de cerrar más grande en móvil */
+@media (max-width: 768px) {
+  .btn-close-lg {
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
