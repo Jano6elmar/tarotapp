@@ -6,7 +6,7 @@ export default function Home() {
       {/* Sección de Bienvenida */}
       <div className="text-center mb-5">
         <h1 className="display-3 fw-bold text-primary mb-3">
-          ✨ Bienvenido a Tarot App ✨
+          ✨ Bienvenido a TarotMarsellApp ✨
         </h1>
         <p className="lead text-muted mx-auto" style={{ maxWidth: "700px" }}>
           Descubre los secretos del tarot, explora los arcanos y obtén respuestas

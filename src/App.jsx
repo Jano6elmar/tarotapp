@@ -67,7 +67,7 @@ function AppContent() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Tarot App
+            TarotMarsellApp
           </Link>
           <button
             className="navbar-toggler"
