@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import arcanosMenores from "../data/arcanosMenores";
 import ArcanoModal from "../components/ArcanoModal";
@@ -6,6 +6,13 @@ import ArcanoModal from "../components/ArcanoModal";
 export default function PaloMenor() {
   const { palo } = useParams();
   const [selectedArcano, setSelectedArcano] = useState(null);
+
+  // 🔥 FIX: Asegurar scroll habilitado al montar componente
+  useEffect(() => {
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+    document.body.classList.remove("modal-open");
+  }, []);
 
   const cartasDelPalo = arcanosMenores.filter(
     (c) => c.palo.toLowerCase() === palo.toLowerCase()

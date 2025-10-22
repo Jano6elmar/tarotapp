@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ArcanoModal from "./ArcanoModal";
 
 import arcanosMayores from "../data/arcanosMayores";
@@ -8,6 +8,13 @@ import arcanosMayores from "../data/arcanosMayores";
 
 export default function Cartas() {
   const [selectedArcano, setSelectedArcano] = useState(null);
+
+  // 🔥 FIX: Asegurar scroll habilitado al montar componente
+  useEffect(() => {
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+    document.body.classList.remove("modal-open");
+  }, []);
 
   return (
     <div className="container py-4">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import backCard from "/assets/reverso/reverso.cartas.png";
 import arcanosMayores from "../data/arcanosMayores";
 
@@ -8,6 +8,13 @@ const Lecturas = () => {
   const [mostrarMazo, setMostrarMazo] = useState(true);
   const [flipped, setFlipped] = useState({});
   const [shuffling, setShuffling] = useState(false);
+
+  // 🔥 FIX: Asegurar scroll habilitado al montar componente
+  useEffect(() => {
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+    document.body.classList.remove("modal-open");
+  }, []);
 
   // Mezclar y desplegar cartas
   const mezclarYDesplegar = () => {

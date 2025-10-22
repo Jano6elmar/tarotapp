@@ -12,6 +12,7 @@ import ArcanosMayores from "./pages/ArcanosMayores";
 import ArcanosMenores from "./pages/ArcanosMenores";
 import Lecturas from "./pages/Lecturas";
 import PaloMenor from "./pages/PaloMenor";
+import ChatMistral from "./components/ChatMistral";
 
 function AppContent() {
   const location = useLocation();
@@ -34,6 +35,11 @@ function AppContent() {
     if (navCollapse) {
       navCollapse.classList.remove("show");
     }
+
+    // 🔥 FIX: Asegurar que el body tenga scroll habilitado
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+    document.body.classList.remove("modal-open");
   }, [location]);
 
   // 🔹 Cierra el menú hamburguesa al hacer click en un link del nav
@@ -91,6 +97,11 @@ function AppContent() {
                   Lecturas
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/chat-mistral">
+                  Chat Mistral
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -99,6 +110,8 @@ function AppContent() {
       <div className="pt-5 mt-3">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/chat-mistral" element={<ChatMistral />} />
+
           <Route path="/arcanos-mayores" element={<ArcanosMayores />} />
           <Route path="/arcanos-menores" element={<ArcanosMenores />} />
           <Route path="/arcanos-menores/:palo" element={<PaloMenor />} />

@@ -33,9 +33,8 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
+/* Removido: .card { padding: 2em; } */
+/* Este estilo genérico interfería con las cards de Bootstrap */
 
 .read-the-docs {
   color: #888;
@@ -66,3 +65,30 @@
   max-height: 500px; /* suficiente para mostrar los links */
 }
 
+/* Estilos para la página de inicio */
+.hover-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hover-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.hover-card .display-4 {
+  transition: transform 0.3s ease;
+}
+
+.hover-card:hover .display-4 {
+  transform: scale(1.2);
+}
+
+.hover-card .btn {
+  transition: all 0.3s ease;
+}
+
+.hover-card:hover .btn {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}

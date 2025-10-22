@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import arcanosMenores from "../data/arcanosMenores";
 
 export default function ArcanosMenores() {
   const palos = ["Copas", "Espadas", "Oros", "Bastos"];
 
+  // 🔥 FIX: Asegurar scroll habilitado al montar componente
+  useEffect(() => {
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+    document.body.classList.remove("modal-open");
+  }, []);
 
   return (
     <div className="container py-4">
