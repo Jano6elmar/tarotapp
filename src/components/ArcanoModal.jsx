@@ -75,19 +75,134 @@ export default function ArcanoModal({ arcano }) {
                 />
               </div>
 
-              {/* Descripción con scroll */}
+              {/* Pestañas de interpretaciones */}
               {arcano.descripcion && (
-                <div
-                  ref={descRef}
-                  className="px-3 pb-3"
-                  style={{
-                    maxHeight: "30vh",
-                    overflowY: "auto",
-                  }}
-                >
-                  <p style={{ whiteSpace: "pre-line", textAlign: "justify" }}>
-                    {arcano.descripcion}
-                  </p>
+                <div className="px-3 pb-3">
+                  <ul className="nav nav-tabs" id="interpretacionesTabs" role="tablist">
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className="nav-link active"
+                        id="carlo-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#carlo"
+                        type="button"
+                        role="tab"
+                        aria-controls="carlo"
+                        aria-selected="true"
+                      >
+                        Carlo B
+                      </button>
+                    </li>
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className="nav-link"
+                        id="jodo-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#jodo"
+                        type="button"
+                        role="tab"
+                        aria-controls="jodo"
+                        aria-selected="false"
+                      >
+                        A.Jodo
+                      </button>
+                    </li>
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className="nav-link"
+                        id="marianne-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#marianne"
+                        type="button"
+                        role="tab"
+                        aria-controls="marianne"
+                        aria-selected="false"
+                      >
+                        Marianne
+                      </button>
+                    </li>
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className="nav-link"
+                        id="santi-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#santi"
+                        type="button"
+                        role="tab"
+                        aria-controls="santi"
+                        aria-selected="false"
+                      >
+                        A.Santi
+                      </button>
+                    </li>
+                  </ul>
+                  
+                  <div className="tab-content mt-2" id="interpretacionesTabContent">
+                    {/* Carlo B */}
+                    <div
+                      ref={descRef}
+                      className="tab-pane fade show active"
+                      id="carlo"
+                      role="tabpanel"
+                      aria-labelledby="carlo-tab"
+                      style={{
+                        maxHeight: "30vh",
+                        overflowY: "auto",
+                      }}
+                    >
+                      <p style={{ whiteSpace: "pre-line", textAlign: "justify" }}>
+                        {arcano.descripcion}
+                      </p>
+                    </div>
+                    
+                    {/* A.Jodo */}
+                    <div
+                      className="tab-pane fade"
+                      id="jodo"
+                      role="tabpanel"
+                      aria-labelledby="jodo-tab"
+                      style={{
+                        maxHeight: "30vh",
+                        overflowY: "auto",
+                      }}
+                    >
+                      <p style={{ whiteSpace: "pre-line", textAlign: "justify" }}>
+                        {arcano.descripcionJodo || "Interpretación de A.Jodo próximamente..."}
+                      </p>
+                    </div>
+                    
+                    {/* Marianne */}
+                    <div
+                      className="tab-pane fade"
+                      id="marianne"
+                      role="tabpanel"
+                      aria-labelledby="marianne-tab"
+                      style={{
+                        maxHeight: "30vh",
+                        overflowY: "auto",
+                      }}
+                    >
+                      <p style={{ whiteSpace: "pre-line", textAlign: "justify" }}>
+                        {arcano.descripcionMarianne || "Interpretación de Marianne próximamente..."}
+                      </p>
+                    </div>
+                    
+                    {/* A.Santi */}
+                    <div
+                      className="tab-pane fade"
+                      id="santi"
+                      role="tabpanel"
+                      aria-labelledby="santi-tab"
+                      style={{
+                        maxHeight: "30vh",
+                        overflowY: "auto",
+                      }}
+                    >
+                      <p style={{ whiteSpace: "pre-line", textAlign: "justify" }}>
+                        {arcano.descripcionSanti || "Interpretación de A.Santi próximamente..."}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
 

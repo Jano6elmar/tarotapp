@@ -127,4 +127,10 @@
     min-width: 48px;
     min-height: 48px;
   }
+  
+  /* Pestañas más pequeñas en móvil */
+  .nav-tabs .nav-link {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+  }
 }
